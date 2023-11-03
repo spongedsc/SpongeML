@@ -1,12 +1,13 @@
 # keep in mind i have no idea how python works
 import socketio
-import aiohttp
+import eventlet
 from transformers import pipeline
 
 image_to_text = pipeline("image-to-text", model="nlpconnect/vit-gpt2-image-captioning")
 
 # create a Socket.IO server
 sio = socketio.Server()
+app = socketio.WSGIApp(sio)
 
 @sio.event
 def imgcaption(sid, data):
@@ -21,3 +22,6 @@ def connect(sid, environ, auth):
 @sio.event
 def disconnect(sid):
     print('disconnect ', sid)
+
+if __name__ == '__main__':
+    eventlet.wsgi.server(eventlet.listen(('', 5000)), app)
