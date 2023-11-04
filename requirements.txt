@@ -1,3 +1,4 @@
 python-socketio
 eventlet
-transformers
+transformers[torch]
+pillow

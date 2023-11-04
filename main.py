@@ -11,7 +11,6 @@ app = socketio.WSGIApp(sio)
 
 @sio.event
 def imgcaption(sid, data):
-    print('message ', data)
     caption = image_to_text(data)
     return caption, 200
 
@@ -24,4 +23,4 @@ def disconnect(sid):
     print('disconnect ', sid)
 
 if __name__ == '__main__':
-    eventlet.wsgi.server(eventlet.listen(('', 5000)), app)
+    eventlet.wsgi.server(eventlet.listen(('', 6000)), app)
