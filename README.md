@@ -1,3 +1,13 @@
-python backend for spongegpt so it can use more ML models
+# ML Backend for [SpongeChat](https://github.com/artificialbutter/SpongeChat)
 
-i do not know python
+## Provides a SocketIO server for SpongeChat (or any other client) with: 
+
+- Image Captioning
+- (Soon) LLM
+
+## Built with
+
+- Python 3.9+ (that i have never used before, sorry in advance)
+- SocketIO
+- [🤗 Transformers](https://huggingface.co/docs/transformers/index)
+- [nlpconnect/vit-gpt2-image-captioning](https://huggingface.co/nlpconnect/vit-gpt2-image-captioning)

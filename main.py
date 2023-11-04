@@ -1,9 +1,9 @@
-# keep in mind i have no idea how python works
 import socketio
 import eventlet
+
 from transformers import pipeline
 
-# create a Socket.IO server
+# create the Socket.IO server
 sio = socketio.Server()
 app = socketio.WSGIApp(sio)
 
