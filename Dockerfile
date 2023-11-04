@@ -12,6 +12,7 @@ RUN pip install -r requirements.txt
 # the code
 COPY . .
 
+USER root
 CMD [ "python3", "main.py" ]
 
 EXPOSE 6000
