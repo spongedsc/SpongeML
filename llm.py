@@ -15,6 +15,8 @@ else:
     tgt = participants[1]['user']['username']
 
 def send_message(message):
+    chat = client.chat.get_chat(char)
+
     data = client.chat.send_message(
         chat['external_id'], tgt, message
     )
@@ -22,3 +24,6 @@ def send_message(message):
     text = data['replies'][0]['text']
 
     return text
+
+def new_chat():
+    client.chat.new_chat(char)

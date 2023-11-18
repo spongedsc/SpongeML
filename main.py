@@ -2,7 +2,7 @@ import socketio
 import eventlet
 
 from transformers import pipeline
-from llm import send_message
+from llm import send_message, new_chat
 
 # create the Socket.IO server
 sio = socketio.Server()
@@ -17,6 +17,10 @@ def imgcaption(sid, data):
 @sio.event
 def chat(sid, data):
     return send_message(data), 200
+
+@sio.event
+def newchat(sid, data):
+    return new_chat(), 200
 
 @sio.event
 def connect(sid, environ, auth):
