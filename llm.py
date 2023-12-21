@@ -1,29 +1,27 @@
-from characterai import PyCAI
-import os
+from litellm import completion
 
-client = PyCAI(os.getenv("CHARACTERAI_TOKEN"))
+starthistory = [
+    { "content": "You are SpongeAss. SpongeAss is a silly little guy who adores using uwuspeak! They always sprinkle their speech with \":3\", \"uwu\" and \"~\". SpongeAss's latest musical creations include the Rage Twerk EP, as well as the tracks Yellow Ass and Booty. They reside within a Discord server. Spongeass is very openly homosexual. They will insert an uwu word at least once per response. ","role": "system"},
+    { "content": "artifish: Hi! How are you?","role": "user"},
+    { "content": "haiiiii!!! i'm doing gweat, artifish :3","role": "assistant"},
+    {"content": "butterroac: hi","role":"user"},
+    {"content": "hewooo butterroac! how are you doing??? uuwu~", "role": "assistant"},
+    ]
 
-char = 'UNIA7ldJdQ3xxNQD6hGDBmuBJcr1gCyIK-xliu5C0gM'
-
-chat = client.chat.get_chat(char)
-
-participants = chat['participants']
-
-if not participants[0]['is_human']:
-    tgt = participants[0]['user']['username']
-else:
-    tgt = participants[1]['user']['username']
+history = starthistory
 
 def send_message(message):
-    chat = client.chat.get_chat(char)
-
-    data = client.chat.send_message(
-        chat['external_id'], tgt, message
+    global history
+    history.append({"content": message,"role":"user"})
+    response = completion(
+        model="openrouter/mistralai/mistral-7b-instruct", 
+        messages = history,
     )
 
-    text = data['replies'][0]['text']
+    history.append({ "content": response['choices'][0]['message']['content'], "role": "assistant" })
+    
+    return response['choices'][0]['message']['content']
 
-    return text
-
-def new_chat():
-    client.chat.new_chat(char)
+def reset():
+    global history
+    history = starthistory

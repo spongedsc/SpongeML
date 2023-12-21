@@ -5,3 +5,4 @@ eventlet
 characterai
 websockets
 python-dotenv
+litellm

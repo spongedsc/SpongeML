@@ -2,7 +2,8 @@ import socketio
 import eventlet
 
 from transformers import pipeline
-from llm import send_message, new_chat
+from apiCAI import send_message, new_chat
+from llm import send_message as LLMmessage, reset as LLMreset
 
 # create the Socket.IO server
 sio = socketio.Server()
@@ -16,10 +17,14 @@ def imgcaption(sid, data):
 
 @sio.event
 def chat(sid, data):
-    return send_message(data), 200
+    if data['usellm'] == True:
+        return LLMmessage(data['message']), 200
+    else:     
+        return send_message(data['message']), 200
 
 @sio.event
 def newchat(sid, data):
+    LLMreset()
     return new_chat(), 200
 
 @sio.event
