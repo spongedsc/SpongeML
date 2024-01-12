@@ -9,7 +9,7 @@ def send_message(message):
     global history
     history.append({"content": message,"role":"user"})
     response = completion(
-            model="ollama/SpongeAss", 
+            model="ollama/SpongeAss:latest", 
             messages = history, 
             api_base=os.getenv("OLLAMA_URL"),
 )
