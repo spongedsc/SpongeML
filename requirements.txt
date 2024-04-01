@@ -2,7 +2,7 @@ transformers[torch]
 pillow
 python-socketio
 eventlet
-characterai
+git+https://codeberg.org/kaiyga/CharacterAITestfork.git@main#egg=characterai
 websockets
 python-dotenv
 litellm
