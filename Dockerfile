@@ -1,4 +1,4 @@
-FROM anibali/pytorch:1.13.1-nocuda
+FROM debian:12
 
 WORKDIR /app
 
