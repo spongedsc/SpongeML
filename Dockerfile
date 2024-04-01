@@ -1,4 +1,4 @@
-FROM debian:12
+FROM python:bullseye
 
 WORKDIR /app
 
