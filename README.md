@@ -2,8 +2,9 @@
 
 ## Provides a SocketIO server for SpongeChat (or any other client) with: 
 
+- CharacterAI Proxy
 - Image Captioning
-- (Soon) LLM
+- (Soon :tm:) LLM
 
 ## Built with
 
@@ -11,3 +12,4 @@
 - SocketIO
 - [🤗 Transformers](https://huggingface.co/docs/transformers/index)
 - [nlpconnect/vit-gpt2-image-captioning](https://huggingface.co/nlpconnect/vit-gpt2-image-captioning)
+- character.ai
