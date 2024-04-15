@@ -1,4 +1,5 @@
 import socketio
+import time
 import eventlet
 
 from transformers import pipeline
@@ -20,7 +21,8 @@ def chat(sid, data):
     if data['usellm'] == True:
         return LLMmessage(data['message']), 200
     else:     
-        return send_message(data['message']), 200
+        time.sleep(20)
+        return send_message(data['message']) + "\n@everyone current session id is " + sid + " <:trollbob:927424567813738496>", 200
 
 @sio.event
 def newchat(sid, data):
