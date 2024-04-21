@@ -1,4 +1,4 @@
-FROM python:3-slim
+FROM pytorch/pytorch:latest
 
 WORKDIR /app
 
