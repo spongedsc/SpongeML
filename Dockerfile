@@ -1,4 +1,4 @@
-FROM pytorch/pytorch:latest
+FROM anibali/pytorch:2.0.1-nocuda
 
 WORKDIR /app
 
