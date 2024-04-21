@@ -1,10 +1,10 @@
-FROM anibali/pytorch:1.13.0-nocuda
+FROM anibali/pytorch:2.0.1-nocuda
 
 WORKDIR /app
 
-RUN apt-get update && apt-get install -y \
+RUN sudo apt-get update && sudo apt-get install -y \
     git \
-    && rm -rf /var/lib/apt/lists/*
+    && sudo rm -rf /var/lib/apt/lists/*
 
 # get the really big model done with
 RUN pip install transformers[torch]
