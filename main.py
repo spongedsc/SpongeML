@@ -2,6 +2,7 @@ import socketio
 import eventlet
 import psutil
 import spongelang
+import textgenwui
 
 from transformers import pipeline
 from apiCAI import send_message, new_chat
@@ -14,7 +15,7 @@ app = socketio.WSGIApp(sio)
 @sio.event
 def imgcaption(sid, data):
     if psutil.virtual_memory().available / 1048576 < 3000:
-        print("Image Recognition Skipped due to low memory")
+        print("Image recognition skipped due to low memory")
         return "", 200
     image_to_text = pipeline(
         "image-to-text", model="nlpconnect/vit-gpt2-image-captioning"
@@ -24,8 +25,14 @@ def imgcaption(sid, data):
 
 
 @sio.event
-def chat(sid, data):
-    msg = send_message(send_message(data["message"]))
+def chat(sid, data: dict):
+    if data.get("textgenwui") is not None:
+        msg = textgenwui.send_message(
+            data["message"],
+            "Assistant",  # CHANGE THIS TO WHATEVER THE CHARACTER'S NAME IS!!!!
+        )
+    else:
+        msg = send_message(send_message(data["message"]))
     code = spongelang.extract_spongelang(msg)
     if code:
         try:
@@ -38,6 +45,7 @@ def chat(sid, data):
 
 @sio.event
 def newchat(sid, data):
+    textgenwui.reset_history()
     return new_chat(), 200
 
 
