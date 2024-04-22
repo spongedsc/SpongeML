@@ -3,6 +3,7 @@ import eventlet
 import psutil
 import spongelang
 import textgenwui
+import os
 
 from transformers import pipeline
 from apiCAI import send_message, new_chat
@@ -29,7 +30,7 @@ def chat(sid, data: dict):
     if data.get("textgenwui") is not None:
         msg = textgenwui.send_message(
             data["message"],
-            "Assistant",  # CHANGE THIS TO WHATEVER THE CHARACTER'S NAME IS!!!!
+            os.getenv("TEXTGENUI_CHARACTER"),
         )
     else:
         msg = send_message(send_message(data["message"]))
