@@ -44,14 +44,14 @@ def process_single_line(
                     line.replace(f"{function_name} ", ""),
                 )
             ]  # TODO HEL;P WHAT IS THIS
-            function = functions[i][1]
+            internalfunction = functions[i][1]
             # print("converting args to correct types")
-            for i, annotate in enumerate(function.__annotations__.values()):
+            for i, annotate in enumerate(internalfunction.__annotations__.values()):
                 if args[i].startswith("$"):
                     args[i] = spongelang_vars.get(args[i].replace("$", ""))
                 args[i] = annotate(args[i])
                 # print(f"converted to {type(args[i])} successfully!")
-            out = function(*args)
+            out = internalfunction(*args)
             # print(out) # ! debug make it not print when finished
             return out
 
