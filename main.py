@@ -55,12 +55,14 @@ def imagerecognitionenabled(sid, data):
 
 @sio.event
 def localgenenabled(sid, data):
+    """
     try:
         requests.get(
             os.getenv("TEXTGENUI_ENDPOINT").split("/v1/")[0]
         )  # shitty hack that probably isnt gonna work 100% of the time
     except requests.exceptions.ConnectionError:
         return False, 200
+    """
     return True, 200
 
 
