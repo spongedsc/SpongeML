@@ -46,7 +46,15 @@ def chat(sid, data: dict):
 
 
 @sio.event
-def istextgenwuiavail(sid, data):
+def imagerecognitionenabled(sid, data):
+    if psutil.virtual_memory().available / 1048576 < 3000:
+        return False, 200
+    else:
+        return True, 200
+
+
+@sio.event
+def localgenenabled(sid, data):
     try:
         requests.get(
             os.getenv("TEXTGENUI_ENDPOINT").split("/v1/")[0]
