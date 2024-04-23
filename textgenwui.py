@@ -12,7 +12,7 @@ history = []
 
 def send_message(message: str, character: str = "Assistant"):
     history.append({"role": "user", "content": message})
-    data = {"mode": "chat", "character": character, "messages": history}
+    data = {"mode": "chat-instruct", "character": character, "messages": history}
     response = requests.post(
         os.getenv("TEXTGENUI_ENDPOINT"),
         headers=headers,
