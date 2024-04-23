@@ -3,6 +3,7 @@ import eventlet
 import psutil
 import spongelang
 import textgenwui
+import requests
 import os
 
 from transformers import pipeline
@@ -42,6 +43,17 @@ def chat(sid, data: dict):
             out = f"ERROR! {type(e).__name__}: {e}"
         return msg + f"\n\nSpongeLang output:\n\n```\n{out}\n```", 200
     return msg, 200
+
+
+@sio.event
+def istextgenwuiavail(sid, data):
+    try:
+        requests.get(
+            os.getenv("TEXTGENUI_ENDPOINT").split("/v1/")[0]
+        )  # shitty hack that probably isnt gonna work 100% of the time
+    except requests.exceptions.ConnectionError:
+        return False, 200
+    return True, 200
 
 
 @sio.event
