@@ -3,6 +3,7 @@ pillow
 python-socketio
 eventlet
 git+https://codeberg.org/kaiyga/CharacterAITestfork.git@main#egg=characterai
+requests
 websockets
 python-dotenv
 psutil
