@@ -28,7 +28,7 @@ def imgcaption(sid, data):
 
 @sio.event
 def chat(sid, data: dict):
-    if data.get("textgenwui") is not None:
+    if data.get("textgenwui") == True:
         msg = textgenwui.send_message(
             data["message"],
             os.getenv("TEXTGENUI_CHARACTER"),
