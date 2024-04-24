@@ -1,3 +1,4 @@
+# catches
 from characterai import PyCAI
 import os
 import tempthing
@@ -29,3 +30,6 @@ def send_message(message):
 def new_chat():
     client.chat.new_chat(char)
     send_message(tempthing.initprompt)
+
+
+# catches

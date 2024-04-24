@@ -1,3 +1,4 @@
+# catches
 FROM anibali/pytorch:2.0.1-nocuda
 
 WORKDIR /app
@@ -23,3 +24,4 @@ EXPOSE 6000
 
 ENV HF_HOME=/modelcache
 VOLUME [ "/modelcache" ]
+# catches

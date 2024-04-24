@@ -1,3 +1,4 @@
+# catches
 transformers[torch]
 pillow
 python-socketio
@@ -7,3 +8,4 @@ requests
 websockets
 python-dotenv
 psutil
+# catches

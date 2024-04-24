@@ -1,3 +1,4 @@
+# catches
 # based on the chat example from textgen docs
 # i actually tested this
 # i forced myself to listen to lhugueny on loop while coding this so i can be more grateful for coding in silence
@@ -29,3 +30,6 @@ def send_message(message: str, character: str = "Assistant"):
 
 def reset_history():
     history.clear()
+
+
+# catches

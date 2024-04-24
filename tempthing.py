@@ -1,3 +1,4 @@
+# catches
 """
 not temporary anymore because im too lazy
 """
@@ -65,3 +66,4 @@ for function in spongelang.functions:
         continue
 
 initprompt = initprompt.replace("[funcs]", funcdesc)
+# catches

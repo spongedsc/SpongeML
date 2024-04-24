@@ -1,3 +1,4 @@
+# catches
 """
 SpongeLang: a simple programming language AI can use
 (original code written by butterroach 2024/4/20 omg funny number i just realized woah)
@@ -189,3 +190,4 @@ print $out4
     print("\n\n === START OF CODE === \n\n")
     output = process_function_calls(code, functions)
     print(output)
+# catches
