@@ -31,7 +31,7 @@ def chat(sid, data: dict):
     if data.get("textgenwui") == True:
         msg = textgenwui.send_message(
             data["message"],
-            os.getenv("TEXTGENUI_CHARACTER"),
+            os.getenv("TEXTGENWUI_CHARACTER"),
         )
     else:
         msg = send_message(send_message(data["message"]))
@@ -57,7 +57,7 @@ def imagerecognitionenabled(sid, data):
 def localgenenabled(sid, data):
     try:
         requests.get(
-            os.getenv("TEXTGENUI_ENDPOINT").split("/v1/")[0]
+            os.getenv("TEXTGENWUI_ENDPOINT").split("/v1/")[0]
         )  # shitty hack that probably isnt gonna work 100% of the time
     except requests.exceptions.ConnectionError:
         return False, 200
