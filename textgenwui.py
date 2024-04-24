@@ -13,12 +13,15 @@ history = []
 def send_message(message: str, character: str = "Assistant"):
     history.append({"role": "user", "content": message})
     data = {"mode": "chat-instruct", "character": character, "messages": history}
-    response = requests.post(
-        os.getenv("TEXTGENUI_ENDPOINT"),
-        headers=headers,
-        json=data,
-        verify=False,  # DevSkim: ignore DS126186
-    )
+    try:
+        response = requests.post(
+            os.getenv("TEXTGENUI_ENDPOINT"),
+            headers=headers,
+            json=data,
+            verify=False,  # DevSkim: ignore DS126186
+        )
+    except requests.exceptions.ConnectionError:
+        return "Error: Could not connect to textgen.wui"
     ai_response = response.json()["choices"][0]["message"]["content"]
     history.append({"role": "assistant", "content": ai_response})
     return ai_response
