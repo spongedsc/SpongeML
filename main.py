@@ -16,41 +16,53 @@ app = socketio.WSGIApp(sio)
 
 @sio.event
 def imgcaption(sid, data):
-    if psutil.virtual_memory().available / 1048576 < 3000:
-        print("Image recognition skipped due to low memory")
-        return "", 200
-    image_to_text = pipeline(
-        "image-to-text", model="nlpconnect/vit-gpt2-image-captioning"
-    )
-    caption = image_to_text(data)
-    return caption, 200
+    try:
+        if psutil.virtual_memory().available / 1048576 < 3000:
+            print("Image recognition skipped due to low memory")
+            return "", 200
+        image_to_text = pipeline(
+            "image-to-text", model="nlpconnect/vit-gpt2-image-captioning"
+        )
+        caption = image_to_text(data)
+        return caption, 200
+    except Exception as e:
+        print(f"Error occurred during image recognition: {e}")
+        return "", 500
 
 
 @sio.event
 def chat(sid, data: dict):
-    if data.get("textgenwui") == True:
-        msg = textgenwui.send_message(
-            data["message"],
-            os.getenv("TEXTGENWUI_CHARACTER"),
-        )
-    else:
-        msg = send_message(send_message(data["message"]))
-    code = spongelang.extract_spongelang(msg)
-    if code:
-        try:
-            out = spongelang.process_function_calls(code, spongelang.functions)
-        except Exception as e:
-            out = f"ERROR! {type(e).__name__}: {e}"
-        return msg + f"\n\nSpongeLang output:\n\n```\n{out}\n```", 200
-    return msg, 200
+    try:
+        if data.get("textgenwui") == True:
+            msg = textgenwui.send_message(
+                data["message"],
+                os.getenv("TEXTGENWUI_CHARACTER"),
+            )
+        else:
+            msg = send_message(send_message(data["message"]))
+        code = spongelang.extract_spongelang(msg)
+        if code:
+            try:
+                out = spongelang.process_function_calls(code, spongelang.functions)
+            except Exception as e:
+                out = f"ERROR! {type(e).__name__}: {e}"
+            return msg + f"\n\nSpongeLang output:\n\n```\n{out}\n```", 200
+        return msg, 200
+    except Exception as e:
+        print(f"Error occurred during chat: {e}")
+        return "", 500
 
 
 @sio.event
 def imagerecognitionenabled(sid, data):
-    if psutil.virtual_memory().available / 1048576 < 3000:
-        return False, 200
-    else:
-        return True, 200
+    try:
+        if psutil.virtual_memory().available / 1048576 < 3000:
+            return False, 200
+        else:
+            return True, 200
+    except Exception as e:
+        print(f"Error occurred during chat: {e}")
+        return "", 500
 
 
 @sio.event
