@@ -1,6 +1,5 @@
 from characterai import PyCAI
 import os
-import tempthing
 
 client = PyCAI(os.getenv("CHARACTERAI_TOKEN"))
 
@@ -28,4 +27,3 @@ def send_message(message):
 
 def new_chat():
     client.chat.new_chat(char)
-    send_message(tempthing.initprompt)
