@@ -57,6 +57,7 @@ def imagerecognitionenabled(sid, data):
         return "", 500
 
 
+"""
 @sio.event
 def localgenenabled(sid, data):
     try:
@@ -66,6 +67,7 @@ def localgenenabled(sid, data):
     except requests.exceptions.ConnectionError:
         return False, 200
     return True, 200
+"""
 
 
 @sio.event
