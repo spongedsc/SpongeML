@@ -1,7 +1,6 @@
 import socketio
 import eventlet
 import psutil
-import spongelang
 import textgenwui
 import requests
 import os
@@ -40,13 +39,6 @@ def chat(sid, data: dict):
             )
         else:
             msg = send_message(send_message(data["message"]))
-        code = spongelang.extract_spongelang(msg)
-        if code:
-            try:
-                out = spongelang.process_function_calls(code, spongelang.functions)
-            except Exception as e:
-                out = f"ERROR! {type(e).__name__}: {e}"
-            return msg + f"\n\nSpongeLang output:\n\n```\n{out}\n```", 200
         return msg, 200
     except Exception as e:
         print(f"Error occurred during chat: {e}")
@@ -65,6 +57,7 @@ def imagerecognitionenabled(sid, data):
         return "", 500
 
 
+"""
 @sio.event
 def localgenenabled(sid, data):
     try:
@@ -74,6 +67,7 @@ def localgenenabled(sid, data):
     except requests.exceptions.ConnectionError:
         return False, 200
     return True, 200
+"""
 
 
 @sio.event
