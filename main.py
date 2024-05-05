@@ -3,6 +3,7 @@ import eventlet
 import psutil
 import textgenwui
 import requests
+from requests.exceptions import Timeout
 import os
 
 from transformers import pipeline
@@ -57,17 +58,22 @@ def imagerecognitionenabled(sid, data):
         return "", 500
 
 
-"""
 @sio.event
 def localgenenabled(sid, data):
     try:
-        requests.get(
-            os.getenv("TEXTGENWUI_ENDPOINT").split("/v1/")[0]
-        )  # shitty hack that probably isnt gonna work 100% of the time
-    except requests.exceptions.ConnectionError:
-        return False, 200
-    return True, 200
-"""
+        response = requests.get(
+            os.getenv("TEXTGENWUI_ENDPOINT").split("/v1/")[0], timeout=1
+        )
+        if response.status_code == 404:
+            return True
+        else:
+            return False
+    except Timeout:
+        print("The request timed out")
+        return False
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return False
 
 
 @sio.event
