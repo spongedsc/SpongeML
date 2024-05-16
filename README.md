@@ -1,6 +1,6 @@
 # SpongeML
 
-## Provides a SocketIO server for any other client) with: 
+## Provides a SocketIO server for any client with: 
 
 - CharacterAI Proxy
 - Image Captioning
